@@ -1,0 +1,8 @@
+*.pyc
+*.log
+*.log.*
+*.sqlite*
+twistd.*
+*#*
+*.save
+pysrc

@@ -1,0 +1,17 @@
+{
+  "repositories":
+  [
+    {
+      "id": "code",
+      "name": "Test repo",
+      "info_services":
+      [
+        {
+          "id": "Main Buildbot",
+          "url": "/",
+          "url_pullrequests": "pullrequests_gh/"
+        }
+      ]
+    }
+  ]
+}

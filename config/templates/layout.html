@@ -1,0 +1,82 @@
+{%- block doctype -%}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% endblock %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    {% block head %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% if metatags %}
+      {{ metatags }}
+    {% endif %}
+    {% if refresh %}
+      <meta http-equiv="refresh" content="{{ refresh|e }}"/>
+    {% endif %}
+    <title>{{ pageTitle|e }}</title>
+    <link rel="stylesheet" href="{{ stylesheet }}" type="text/css" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ path_to_root }}rss">
+    <link rel="shortcut icon" href="{{ path_to_root }}favicon.ico">
+    {% endblock %}
+  </head>
+  <body class="interface">
+    {% block header -%}
+    <div class="header">
+     <div>
+        <a href="{{ path_to_root or '.' }}">Home</a>
+        {% if authz.advertiseAction('view', request) %}
+        -
+        <a href="{{ path_to_root }}builders">Builders</a>
+        <a href="{{ path_to_root }}one_line_per_build">Recent Builds</a>
+        <a href="{{ path_to_root }}buildslaves">Buildslaves</a>
+        <br/>
+        OpenCV repo:
+        <a href="/pullrequest/#/summary/code">Pull requests</a>
+        -
+        <a href="{{ path_to_root }}waterfall?category=checkmaster">Nightly check</a>
+        -
+        <a href="{{ path_to_root }}waterfall?category=precommit">Precommit</a>
+        {% endif %}
+     </div>
+     {% if authz.authenticated(request) %}
+     <div class="auth">
+     {{ authz.getUsernameHTML(request) }}
+     |<a href="{{ path_to_root }}logout">Logout</a>
+     </div>
+     {% endif %}
+    </div>
+    {% endblock %}
+
+    {%- block barecontent -%}
+    <hr/>
+
+    {% if alert_msg != "" %}
+    <div class="alert">
+    {{ alert_msg }}
+    </div>
+    {% endif %}
+
+    <div class="content">
+      {%- block content -%}
+      {%- endblock -%}
+    </div>
+    {%- endblock -%}
+
+    {%- block footer -%}
+    <div class="footer" style="clear:both">
+      <hr/>
+      <a href="http://buildbot.net/">BuildBot</a> ({{version}})
+      {% if title -%}
+        working for the&nbsp;
+        {%- if title_url -%}
+          <a href="{{ title_url }}">{{ title }}</a>
+        {%- else -%}
+          {{ title }}
+        {%- endif -%}
+        &nbsp;project.
+      {%- endif -%}
+      <br/>
+      Page built: <b>{{ time }}</b> ({{ tz }})
+    </div>
+    {% endblock -%}
+  </body>
+</html>
