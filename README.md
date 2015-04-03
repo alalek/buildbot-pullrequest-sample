@@ -18,18 +18,17 @@ Requirements
 Installation
 ------------
 
-* Change files access rights to share access with Docker container (container will add some files):
+* Run deploy script:
 
-  chown -R $USER:10000 ./
+  ./deploy.sh
 
-* Build Docker image:
-
-  docker build -t buildbot_image deploy
+This script creates deploy/env.sh file to store settings and builds docker image (image name is buildbot_image).
+Edit deploy/env.sh and setup proper settings.
 
 * Create container and run:
 
 ```
-  docker run -itd \
+  docker run -it \
     -p 8010:8010 -p 9989:9989 \
     --name buildbot \
     -v `pwd`:/app \
@@ -61,7 +60,7 @@ These steps enable debug for PyDev package from Eclipse.
 Container creation:
 
 ```
-  docker run -itd \
+  docker run -it \
     -p 8010:8010 -p 9989:9989 \
     --name buildbot-debug \
     --env DEBUG=1 \

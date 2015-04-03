@@ -1,3 +1,4 @@
+import os
 import re
 import pullrequest.context
 from twisted.python import log, failure
@@ -31,7 +32,7 @@ class GitLabContext(pullrequest.context.Context):
 
 
     project_id = -1  # curl --header "PRIVATE-TOKEN: xXxXxXxXxXx" "https://gitlab.itseez.com/api/v3/projects/"
-    gitlab_private_token = 'xXxXxXxXxXx'  # TODO
+    gitlab_private_token = os.environ['GITLAB_APIKEY']  # check deploy/apikeys.sh
 
     client = None
 

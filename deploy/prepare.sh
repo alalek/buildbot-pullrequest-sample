@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -f /app/deploy/env.sh ]; then
+  . /app/deploy/env.sh
+fi
+
 umask 0000
 virtualenv --system-site-packages /env
 . /env/bin/activate

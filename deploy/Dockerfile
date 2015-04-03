@@ -11,7 +11,4 @@ RUN \
 RUN [ -x /usr/bin/nodejs ] && ln -s /usr/bin/nodejs /usr/bin/node && \
   npm install -g bower grunt-cli
 
-VOLUME ["/app"]
-VOLUME ["/etc/supervisor/conf.d"]
-
 CMD ["/app/deploy/entry.sh"]
