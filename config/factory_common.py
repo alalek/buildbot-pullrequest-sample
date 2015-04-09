@@ -53,7 +53,7 @@ def getMergeCommand(codebase, workdir, doStepIf=True):
     def doStepIfFn(step):
         if doStepIf == False or (not doStepIf == True and not doStepIf(step)):
             return False
-	return getMergeNeededFn(codebase)(step)
+        return getMergeNeededFn(codebase)(step)
     return ShellCommand(name="Merge %s with test branch" % codebase, haltOnFailure=True,
                         command=Interpolate('git pull -v "%%(src:%s_merge:repository)s" "%%(src:%s_merge:branch)s"' % (codebase, codebase)),
                         workdir=workdir, description="merge %s" % codebase, descriptionDone="merge %s" % codebase,
@@ -107,8 +107,6 @@ def getResultFileNameRenderer(testPrefix, test, testSuffix, fileSuffix='xml'):
 class CommonFactory(object):
 
     SRC_DIR = 'src'
-
-    plainRunName = ''
 
     def __init__(self, **kwargs):
         self.forceSched = kwargs.pop('forceSched', {})
@@ -271,7 +269,7 @@ class CommonFactory(object):
                hideStepIf=lambda result, s: result == SUCCESS, haltOnFailure=True))
 
         # run buildenv with dummy command to remove Git index.lock
-        self.factorySteps.append(Compile(command=self.envCmd + 'echo Initialize', env={'BUILD_INITIALIZE':'1'},
+        self.factorySteps.append(ShellCommand(command=self.envCmd + 'echo Initialize', env={'BUILD_INITIALIZE':'1'},
             workdir='.',
             name='init', descriptionDone='init', description='init',
             haltOnFailure=True))  # , hideStepIf=lambda result, s: result == SUCCESS))
