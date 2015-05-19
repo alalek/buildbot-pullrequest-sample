@@ -1,4 +1,14 @@
-FROM dockerfile/ubuntu
+FROM ubuntu:14.04
+
+RUN \
+  sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
+  apt-get update && \
+  apt-get install -y \
+    build-essential \
+    software-properties-common \
+    curl git htop man unzip vim wget ncdu mc nano time \
+    && \
+  rm -rf /var/lib/apt/lists/*
 
 RUN \
   apt-get update && \
