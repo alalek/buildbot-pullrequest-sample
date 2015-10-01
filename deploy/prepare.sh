@@ -17,6 +17,7 @@ cd /app/buildbot/master
 python setup.py develop
 )
 
+[ -d /app/config/pullrequest_ui/package.json ] &&
 (
 cd /app/config/pullrequest_ui && npm install
 )

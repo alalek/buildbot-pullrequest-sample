@@ -6,14 +6,13 @@ if [ ! -f deploy/env.sh ]; then
   cat > deploy/env.sh <<EOF
 export APP_UID=$UID
 export APP_GID=$GROUPS
-export GITLAB_APIKEY="xXxXxXx"
-
-#npm config set registry "http://npm.cache.localdomain:8080/"
+export GITHUB_APIKEY="xXxXxXx"
 EOF
 fi
 
 # Docker image
-docker build -t buildbot_image deploy
+docker build -t buildbot_image deploy/production
+#docker build -t buildbot_image deploy/development
 
 echo "1) Check settings: deploy/env.sh"
 

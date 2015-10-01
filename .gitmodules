@@ -5,7 +5,7 @@
 [submodule "pullrequest_ui"]
 	path = config/pullrequest_ui
 	url = ../common-pullrequest-ui.git
-	branch = master
+	branch = dist/master
 [submodule "buildbot"]
 	path = buildbot
 	url = ../common-buildbot.git
